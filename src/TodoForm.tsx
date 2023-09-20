@@ -5,14 +5,13 @@ interface FormProps {
   setDesc: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Form: React.FC<FormProps> = ({ handleSubmit, setDesc }) => {
+export default function Form({ handleSubmit, setDesc }: FormProps) {
   return (
-    <div>
+    <>
       <form onSubmit={handleSubmit}>
         <input type="text" onChange={(e) => setDesc(e.target.value)}></input>
-        <button>Add</button>
+        <button style={{ backgroundColor: "#8ae38a" }}>Add</button>
       </form>
-    </div>
+    </>
   );
-};
-export default Form;
+}

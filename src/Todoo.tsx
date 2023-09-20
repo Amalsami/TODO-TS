@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-
-import Form from "./Form";
-import View from "./View";
-import Footer from "./Footer";
-import Test from "./Test";
+import Form from "./TodoForm";
+import View from "./TodoView";
+import Footer from "./TodoFooter";
 export interface Todo {
   picked: boolean;
   desc: string;
@@ -39,21 +37,19 @@ function Todoo(): JSX.Element {
   }
 
   return (
-    <>
-      <div className="container">
-        <Form handleSubmit={handleSubmit} setDesc={setDesc}></Form>
-        <View
-          handleDelete={handleDelete}
-          pickedItems={pickedItems}
-          handlePicked={handlePicked}
-          item={item}
-        ></View>
-        <Footer
-          handleDeletePicked={handleDeletePicked}
-          setItem={setItem}
-        ></Footer>
-      </div>
-    </>
+    <div className="container">
+      <Form handleSubmit={handleSubmit} setDesc={setDesc}></Form>
+      <View
+        handleDelete={handleDelete}
+        pickedItems={pickedItems}
+        handlePicked={handlePicked}
+        item={item}
+      ></View>
+      <Footer
+        handleDeletePicked={handleDeletePicked}
+        setItem={setItem}
+      ></Footer>
+    </div>
   );
 }
 
