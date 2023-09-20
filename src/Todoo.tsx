@@ -1,16 +1,22 @@
 import React, { useState } from "react";
-interface todo {
+
+import Form from "./Form";
+import View from "./View";
+import Footer from "./Footer";
+import Test from "./Test";
+export interface Todo {
   picked: boolean;
   desc: string;
   id: number;
 }
 function Todoo(): JSX.Element {
-  const [item, setItem] = useState<todo[]>([]);
+  const [item, setItem] = useState<Todo[]>([]);
   const [desc, setDesc] = useState<string>("");
   const [pickedItems, setPicked] = useState<{ [key: number]: boolean }>({});
+
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const newItem: todo = { picked: false, desc, id: Date.now() };
+    const newItem: Todo = { picked: false, desc, id: Date.now() };
     setItem([...item, newItem]);
     setDesc("");
   }
@@ -33,29 +39,21 @@ function Todoo(): JSX.Element {
   }
 
   return (
-    <div className="container">
-      <form onSubmit={handleSubmit}>
-        <input type="text" onChange={(e) => setDesc(e.target.value)}></input>
-        <button>add</button>
-      </form>
-      {item.map((item) => (
-        <div className="card" key={item.id}>
-          <div
-            role="button"
-            onClick={() => handlePicked(item.id)}
-            style={{
-              cursor: "pointer",
-              textDecoration: pickedItems[item.id] ? "line-through" : "none",
-            }}
-          >
-            <span>{item.desc}</span>
-          </div>
-          <button onClick={() => handleDelete(item.id)}>delete</button>
-        </div>
-      ))}
-      <button onClick={() => setItem([])}>reset</button>
-      <button onClick={handleDeletePicked}>remove picked</button>
-    </div>
+    <>
+      <div className="container">
+        <Form handleSubmit={handleSubmit} setDesc={setDesc}></Form>
+        <View
+          handleDelete={handleDelete}
+          pickedItems={pickedItems}
+          handlePicked={handlePicked}
+          item={item}
+        ></View>
+        <Footer
+          handleDeletePicked={handleDeletePicked}
+          setItem={setItem}
+        ></Footer>
+      </div>
+    </>
   );
 }
 

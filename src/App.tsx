@@ -1,5 +1,6 @@
-import Todo from "./Todo";
-import Todoo from "./Todoo.tsx";
+import React from "react";
+import "./index.css";
+import Todoo from "./Todoo"; // Update the import extension
 
 function App() {
   return (
